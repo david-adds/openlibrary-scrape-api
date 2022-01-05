@@ -24,7 +24,7 @@ class EbooksSpider(scrapy.Spider):
                 yield {
                     'title': ebook.get('title'),
                     'subject': ebook.get('subject'),
-                    'athors': [author.get('name') for author in ebook.get('authors')], 
+                    'authors': [author.get('name') for author in ebook.get('authors')], 
                     'availability': ebook.get('availability').get('status')
                 }
         except AttributeError:
@@ -32,7 +32,7 @@ class EbooksSpider(scrapy.Spider):
                     yield {
                     'title': ebook.get('title'),
                     'subject': ebook.get('subject'),
-                    'athors': [author.get('name') for author in ebook.get('authors')] 
+                    'authors': [author.get('name') for author in ebook.get('authors')] 
                 }
             
         self.offset += self.INCREMENTED_BY
