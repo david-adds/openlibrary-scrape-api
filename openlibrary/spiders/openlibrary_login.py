@@ -1,5 +1,5 @@
 import scrapy
-
+from scrapy.http import FormRequest
 
 class OpenlibraryLoginSpider(scrapy.Spider):
     name = 'openlibrary_login'
@@ -7,4 +7,22 @@ class OpenlibraryLoginSpider(scrapy.Spider):
     start_urls = ['https://openlibrary.org/account/login']
 
     def parse(self, response):
-        pass
+        yield FormRequest.from_response(
+            response,
+            formid = 'register',
+            formdata = {
+                'username': 'david.adds@gmail.com',
+                'password': '1234',
+                'redirect': '/account/loans',
+                'debug_token': '',
+                'login': 'Log In'
+                
+
+
+            },
+            callback = self.after_login
+        )
+    def after_login(self,response):
+        print('LOGGED IN!!!')
+        
+        
